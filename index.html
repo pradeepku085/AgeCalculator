@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="siteContainer">
+      <div class="header"><h1>Age Calculator</h1></div>
+      <div class="form-input">
+        <form>
+          <div class="date">
+            <label>Date</label>
+            <input
+              type="text"
+              id="date"
+              name="date"
+              placeholder="DD"
+              required
+              minlength="1"
+              maxlength="2"
+            />
+          </div>
+          <div class="month">
+            <label>Month</label>
+            <input
+              type="text"
+              id="month"
+              name="month"
+              placeholder="MM"
+              required
+              minlength="1"
+              maxlength="2"
+            />
+          </div>
+          <div class="year">
+            <label>Year</label>
+            <input
+              type="text"
+              id="year"
+              name="year"
+              placeholder="YYYY"
+              required
+              minlength="4"
+              maxlength="4"
+            />
+          </div>
+          <div class="btn">
+            <input type="button" value="Submit" name="submit" onclick="age()" />
+          </div>
+        </form>
+      </div>
+      <div id="age"></div>
+    </div>
+
+    <script>
+      function age() {
+        let d1 = document.getElementById("date").value;
+        let m1 = document.getElementById("month").value;
+        let y1 = document.getElementById("year").value;
+
+        let date = new Date();
+        let d2 = date.getDate();
+        let m2 = date.getMonth() + 1;
+        // console.log(m2);
+        let y2 = date.getFullYear();
+        let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        if (d1 > d2) {
+          d2 = d2 + month[m2 - 1];
+          m2 = m2 - 1;
+        }
+
+        if (m1 > m2) {
+          m2 = m2 + 12;
+          y2 = y2 - 1;
+        }
+
+        let d = d2 - d1;
+        // console.log(d);
+        let m = m2 - m1;
+        // console.log(m);
+        let y = y2 - y1;
+        // console.log(y);
+        if (
+          d1 == "" ||
+          d1 == NaN ||
+          m1 == "" ||
+          m1 == NaN ||
+          y1 == "" ||
+          y1 == NaN
+        ) {
+          document.getElementById(
+            "age"
+          ).innerHTML = `Please Input valid data for date`;
+        } else {
+          document.getElementById(
+            "age"
+          ).innerHTML = `Your Age is ${y} Years ${m} Months ${d} Days.`;
+        }
+      }
+    </script>
+  </body>
+</html>
